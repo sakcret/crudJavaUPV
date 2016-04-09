@@ -5,11 +5,12 @@
  */
 package vistas;
 
-import entidades.Cliente;
 import javax.swing.table.DefaultTableModel;
 import gestion.Gestion_clientes;
 import java.util.List;
 import entidades.Cliente;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 public class Frm_clientes extends javax.swing.JFrame {
 
@@ -43,8 +44,7 @@ public class Frm_clientes extends javax.swing.JFrame {
                     c_tmp.getNombre() + " " + c_tmp.getApaterno() + " " + c_tmp.getAmaterno(),
                     c_tmp.getTipoTXT(c_tmp.getTipo()),
                     c_tmp.getCorreo(),
-                    c_tmp.getTelefono(),
-                    "opc"
+                    c_tmp.getTelefono()
                 };
                 modelo.addRow(datos);
             }
@@ -58,7 +58,7 @@ public class Frm_clientes extends javax.swing.JFrame {
     public void setGestionClientes(Gestion_clientes gestionClientes) {
         this.gestionClientes = gestionClientes;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,9 +71,11 @@ public class Frm_clientes extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         btn_actualizar = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_agregacliente = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         btn_buscar = new javax.swing.JButton();
+        btn_eliminacliente = new javax.swing.JButton();
+        btn_modificacliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtb_listaClientes = new javax.swing.JTable();
 
@@ -87,7 +89,12 @@ public class Frm_clientes extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Agregar");
+        btn_agregacliente.setText("Agregar");
+        btn_agregacliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_agregaclienteActionPerformed(evt);
+            }
+        });
 
         btn_buscar.setText("b");
         btn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,19 +103,37 @@ public class Frm_clientes extends javax.swing.JFrame {
             }
         });
 
+        btn_eliminacliente.setText("Eliminar");
+        btn_eliminacliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminaclienteActionPerformed(evt);
+            }
+        });
+
+        btn_modificacliente.setText("Modificar");
+        btn_modificacliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificaclienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_actualizar)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_agregacliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_modificacliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_eliminacliente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +141,11 @@ public class Frm_clientes extends javax.swing.JFrame {
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_actualizar)
-                    .addComponent(jButton2)
+                    .addComponent(btn_agregacliente)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_buscar)))
+                    .addComponent(btn_buscar)
+                    .addComponent(btn_eliminacliente)
+                    .addComponent(btn_modificacliente)))
         );
 
         jtb_listaClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -126,7 +153,7 @@ public class Frm_clientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Nombre", "Tipo", "Correo", "Teléfono", "."
+                "ID", "Nombre", "Tipo", "Correo", "Teléfono"
             }
         ));
         jScrollPane1.setViewportView(jtb_listaClientes);
@@ -139,7 +166,7 @@ public class Frm_clientes extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 786, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -149,7 +176,7 @@ public class Frm_clientes extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
@@ -157,20 +184,50 @@ public class Frm_clientes extends javax.swing.JFrame {
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
      
-        Cliente c = new Cliente(9999, "Chapo", "Guzman", "");
-        gestionClientes.agrega(c);
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         refreshLista(this.gestionClientes.getLista_clientes());
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
+    private void btn_agregaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregaclienteActionPerformed
+        new Frm_addUpdCliente(this).setVisible(true);
+    }//GEN-LAST:event_btn_agregaclienteActionPerformed
+
+    private void btn_eliminaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminaclienteActionPerformed
+         int filaSelecccionada=this.jtb_listaClientes.getSelectedRow();
+        if (filaSelecccionada!=-1) {
+            int idClienteaBuscar=Integer.parseInt((String)jtb_listaClientes.getValueAt(filaSelecccionada, 0));
+            Cliente clienteAEliminar=gestionClientes.buscar(idClienteaBuscar);
+            gestionClientes.elimina(clienteAEliminar);
+            refreshLista(this.gestionClientes.getLista_clientes());
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Selecciona un cliente para Eliminar", "No has seleccionado un cliente", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_eliminaclienteActionPerformed
+
+   
+    
+    private void btn_modificaclienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificaclienteActionPerformed
+        int filaSelecccionada=this.jtb_listaClientes.getSelectedRow();
+        if (filaSelecccionada!=-1) {
+            System.out.println(jtb_listaClientes.getValueAt(filaSelecccionada, 0));
+             int idClienteaBuscar=Integer.parseInt((String)jtb_listaClientes.getValueAt(filaSelecccionada, 0));
+            Cliente clienteAmodificar=gestionClientes.buscar(idClienteaBuscar);
+            new Frm_addUpdCliente(this,clienteAmodificar).setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Selecciona un cliente para modificar", "No has seleccionado un cliente", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btn_modificaclienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_actualizar;
+    private javax.swing.JButton btn_agregacliente;
     private javax.swing.JButton btn_buscar;
+    private javax.swing.JButton btn_eliminacliente;
+    private javax.swing.JButton btn_modificacliente;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;

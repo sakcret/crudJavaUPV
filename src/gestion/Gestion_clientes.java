@@ -22,7 +22,7 @@ public class Gestion_clientes {
         }
     }
 
-    private Cliente buscar(int id) {
+    public Cliente buscar(int id) {
         for (int i = 0; i < lista_clientes.size(); i++) {
             Cliente buscado = lista_clientes.get(i);
             if (buscado.getId() == id) {
@@ -53,7 +53,12 @@ public class Gestion_clientes {
     public boolean cambia(int clienteAcambiar, Cliente clienteCambiado){
         Cliente buscado=buscar(clienteAcambiar);
         if (buscado!=null) {
-            buscado=clienteCambiado;
+            buscado.setNombre(clienteCambiado.getNombre());
+            buscado.setApaterno(clienteCambiado.getApaterno());
+            buscado.setAmaterno(clienteCambiado.getAmaterno());
+            buscado.setTipo(clienteCambiado.getTipo());
+            buscado.setTelefono(clienteCambiado.getTelefono());
+            buscado.setCorreo(clienteCambiado.getCorreo());
             return true;
         }
         return false;
